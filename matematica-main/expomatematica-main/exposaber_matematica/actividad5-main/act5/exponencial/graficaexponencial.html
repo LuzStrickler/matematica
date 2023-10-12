@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<>
+<head>
+    <title>Gráfico de Función Lineal</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="/expomatematica-main/exposaber_matematica/actividad5-main/act5/css/styles.css">
+
+</head>
+<>
+    <div class="navbar">
+        <div class="container flex">
+          <h1 class="logo">EXPOSABER</h1>
+            <nav>
+              <ul>
+                <li class="nav"><a href="index.html" class="outline">Inicio</a></li>
+                <li class="nav"><a href="/expomatematica-main/exposaber_matematica/actividad5-main/act5/lineal/lineal.html" class="outline">Función Lineal</a></li>
+                <li class="nav"><a class="outline" href="/expomatematica-main/exposaber_matematica/actividad5-main/act5/cuadratica/cuadratica.html">Función Cuadrática</a></li>
+                <li class="nav"><a href="/expomatematica-main/exposaber_matematica/actividad5-main/act5/exponencial/exponencial.html" class="outline">Función Exponencial</a></li>
+                <li class="nav"><a href="/expomatematica-main/exposaber_matematica/actividad5-main/act5/logaritmica/logaritmica.html" class="outline">Función Logarítmica</a></li>
+              </ul>
+            </nav>
+        </div>
+      </div>
+        <h1  class="titulol"  style="color:  rgb(231, 148, 59)">Gráfico de Función Exponencial</h1>
+        <div style="width: 100%; margin: 0 auto;">
+            <form id="parametrosForm">
+                <label for="a" class="parametrol" style="color: black "><b>Coeficiente a:</b></label>
+                <input type="number" id="a" step="0.01" required><br><br>
+   
+                <label for="b" class="parametrol" style="color: black "><b>Base b:</b></label>
+                <input type="number" id="b" step="0.01" required><br><br>
+                
+                <input type="submit" value="Generar Gráfico" id="boton1">
+            </form>
+            <canvas id="myChart"></canvas>
+    </div>
+    <footer>
+        <div class="container grid-3">
+          <div class="copyright">
+            <h1>EXPOSABER</h1>
+            <p>IRESM</p>
+          </div>
+          <nav class="links">
+            <ul>
+              <li class="nav"><a href="index.html" class="outline">Inicio</a></li>
+                <li class="nav"><a href="/expomatematica-main/exposaber_matematica/actividad5-main/act5/lineal/lineal.html" class="outline">Función Lineal</a></li>
+                <li class="nav"><a class="outline" href="/expomatematica-main/exposaber_matematica/actividad5-main/act5/cuadratica/cuadratica.html">Función Cuadrática</a></li>
+                <li class="nav"><a href="/expomatematica-main/exposaber_matematica/actividad5-main/act5/exponencial/exponencial.html" class="outline">Función Exponencial</a></li>
+                <li class="nav"><a href="/expomatematica-main/exposaber_matematica/actividad5-main/act5/logaritmica/logaritmica.html" class="outline">Función Logarítmica</a></li>
+            </ul>
+          </nav>
+          <div class="profiles">
+            <a href=""><em class="fab fa-instagram fa-2x"></em></a>
+            <a href=""><em class="fab fa-facebook fa-2x"></em></a>
+            <a href=""><em class="fab fa-whatsapp fa-2x"></em></a>
+          </div>
+        </div>
+      </footer>
+
+      <script>
+        // Función para crear el gráfico
+        function crearGrafico(a, b) {
+            var ctx = document.getElementById('myChart').getContext('2d');
+
+            // Ecuación de la función exponencial: y = a * b^x
+            var data = {
+                labels: [],
+                datasets: [{
+                    label: 'Función Exponencial',
+                    data: [],
+                    borderColor: 'orange',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            };
+
+            // Generar puntos de datos para la función exponencial
+            for (var x = -5; x <= 5; x += 0.1) {
+                var y = a * Math.pow(b, x);
+                data.labels.push(x.toFixed(2));
+                data.datasets[0].data.push(y.toFixed(2));
+            }
+
+            var config = {
+                type: 'line',
+                data: data,
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'X'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Y'
+                            }
+                        }
+                    }
+                }
+            };
+
+            var myChart = new Chart(ctx, config);
+        }
+
+        // Manejar el envío del formulario
+        document.getElementById('parametrosForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var a = parseFloat(document.getElementById('a').value);
+            var b = parseFloat(document.getElementById('b').value);
+            crearGrafico(a, b);
+        });
+    </script>
+</body>
+</html>
